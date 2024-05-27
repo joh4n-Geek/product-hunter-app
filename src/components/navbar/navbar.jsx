@@ -1,36 +1,47 @@
 import PropTypes from "prop-types";
-import {
-  AiFillMoon,
-  AiOutlineSearch,
-  AiOutlineSun
-} from "react-icons/ai";
+import { AiFillMoon, AiOutlineSearch, AiOutlineSun } from "react-icons/ai";
 import "./Navbar.css";
+import { useState } from "react";
 
 const Navbar = ({ theme, setTheme }) => {
+  const [activeLink, setActiveLink] = useState('products');
+
   const onToggleColorMode = () => {
-    theme === 'light' ? setTheme('dark') : setTheme('light');
-  }
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
   return (
     <div className="navbar">
-      <img src="src\assets\product-hunter-logo.png" alt="Product Hunter logo" className="product-hunter-logo" />
-      {/* <h3>Product Hunter</h3> */}
-      <ul>
-        <li>Products</li>
-        <li>News</li>
-        <li>Comunity</li>
+      <img
+        src="src\assets\product-hunter-logo.png"
+        alt="Product Hunter logo"
+        className="product-hunter-logo"
+      />
+      <ul className="navbar-links">
+        <li onClick={() => {setActiveLink("products")}} className={activeLink === "products" ? "active" : ""}>Products</li>
+        <li onClick={() => {setActiveLink("news")}} className={activeLink === "news" ? "active" : ""}>News</li>
+        <li onClick={() => {setActiveLink("community")}} className={activeLink === "community" ? "active" : ""}>Community</li>
       </ul>
       <div className="search-box">
         <input type="text" placeholder="Search a product..." />
         <span className="toggle-icon">
-          <AiOutlineSearch size={25} color="#fff"/>
+          <AiOutlineSearch size={25} color="#fff" />
         </span>
       </div>
-      <span className="toggle-icon" onClick={() => {onToggleColorMode()}}>
-        {theme === 'light' ? <AiFillMoon size={25} /> : <AiOutlineSun size={25} />}
+      <span
+        className="toggle-icon"
+        onClick={() => {
+          onToggleColorMode();
+        }}
+      >
+        {theme === "light" ? (
+          <AiFillMoon size={25} />
+        ) : (
+          <AiOutlineSun size={25} />
+        )}
       </span>
-    <button className="btn btn-outline-dark ms-4" type="button">
-      Sign in
-    </button>
+      <button className="ms-4" type="button">
+        Sign in
+      </button>
     </div>
     // Bootstrap navbar
     // <nav className="navbar navbar-expand-lg sticky-top bg-body-tertiary">

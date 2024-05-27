@@ -14,17 +14,21 @@
   cursor: pointer;
 }
 
-ul {
+.navbar-links {
   flex: 1;
   list-style: none;
   text-align: center;
 }
 
-ul li {
+.navbar-links li {
   display: inline-block;
   margin: 5px 20px;
   font-size: 18px;
   cursor: pointer;
+}
+
+.navbar .active {
+  border-bottom: 2px solid #212529;
 }
 
 .toggle-icon {
@@ -50,6 +54,21 @@ ul li {
 }
 
 .search-box input::placeholder {
+  color: #fff;
+}
+
+.navbar button {
+  background: transparent;
+  font-size: 18px;
+  border: 2px solid #212529;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.navbar button:hover {
+  background-color: #212529;
   color: #fff;
 }
 

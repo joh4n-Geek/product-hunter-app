@@ -1,6 +1,6 @@
 import ProductCard from "./components/product/product-card";
 // import ProductDetail from "./components/product/product-detail";
-import Navbar from "./components/core/navbar";
+import Navbar from "./components/navbar/navbar";
 import { useEffect, useState } from "react";
 import { getProducts } from "./helpers/getProducts";
 import "./App.css";

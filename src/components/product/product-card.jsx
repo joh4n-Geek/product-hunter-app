@@ -29,7 +29,7 @@ const ProductCard = ({ product }) => {
     //         <p><small>Average rating {product.average_rating}</small></p>
     //     </div>
     // </div>
-    <div className="card text-bg-light mb-5">
+    <div className="card mb-4">
       <div className="row g-0">
         <div className="col-sm-4">
           <img
