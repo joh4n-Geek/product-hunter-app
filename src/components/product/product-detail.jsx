@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import Review from "../review/review";
 import { AiFillStar, AiOutlineStar, AiTwotoneStar } from "react-icons/ai";
+import Review from "../review/review";
 
 const productPropTypes = PropTypes.shape({
   id: PropTypes.number.isRequired,
@@ -44,7 +44,7 @@ const ProductDetail = ({ product }) => {
               width={60}
               height={60}
             ></img>
-                <img
+            <img
               src="https://images.unsplash.com/photo-1572666341285-c8cb9790ca50?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               className="border border-secondary-subtle p-2"
               alt={product.name}

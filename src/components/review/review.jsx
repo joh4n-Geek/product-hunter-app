@@ -7,8 +7,8 @@ const Review = () => {
         <div className="col-md-4">
           {/* <img src="..." className="img-fluid rounded-start" alt="..."> */}
           <span>
-              <AiOutlineUser size={70} />
-            </span>
+            <AiOutlineUser size={70} />
+          </span>
           {/* </img> */}
         </div>
         <div className="col-md-8">
@@ -20,7 +20,9 @@ const Review = () => {
               longer.
             </p>
             <p className="card-text">
-              <small className="text-body-secondary">Last updated 3 mins ago</small>
+              <small className="text-body-secondary">
+                Last updated 3 mins ago
+              </small>
             </p>
           </div>
         </div>

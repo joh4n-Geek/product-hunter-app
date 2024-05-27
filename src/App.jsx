@@ -1,16 +1,16 @@
 import ProductCard from "./components/product/product-card";
 // import ProductDetail from "./components/product/product-detail";
-import Navbar from "./components/navbar/navbar";
 import { useEffect, useState } from "react";
-import { getProducts } from "./helpers/getProducts";
 import "./App.css";
+import Navbar from "./components/navbar/navbar";
+import { getProducts } from "./helpers/getProducts";
 
 function App() {
-  const currentTheme = localStorage.getItem('currentTheme');
+  const currentTheme = localStorage.getItem("currentTheme");
 
   const [searchText, setSearchText] = useState("");
   const [products, setProducts] = useState([]);
-  const [theme, setTheme] = useState(currentTheme ? currentTheme : 'light');
+  const [theme, setTheme] = useState(currentTheme ? currentTheme : "light");
 
   // Objeto para probar el detalle de producto
   // const product =  {
@@ -23,7 +23,7 @@ function App() {
 
   // Se pueden usar varios useEffect???
   useEffect(() => {
-    localStorage.setItem('currentTheme', theme);
+    localStorage.setItem("currentTheme", theme);
   }, [theme]);
 
   useEffect(() => {

@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { AiFillMoon, AiOutlineSearch, AiOutlineSun } from "react-icons/ai";
 import "./Navbar.css";
-import { useState } from "react";
 
 const Navbar = ({ theme, setTheme }) => {
-  const [activeLink, setActiveLink] = useState('products');
+  const [activeLink, setActiveLink] = useState("products");
 
   const onToggleColorMode = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
@@ -17,9 +17,30 @@ const Navbar = ({ theme, setTheme }) => {
         className="product-hunter-logo"
       />
       <ul className="navbar-links">
-        <li onClick={() => {setActiveLink("products")}} className={activeLink === "products" ? "active" : ""}>Products</li>
-        <li onClick={() => {setActiveLink("news")}} className={activeLink === "news" ? "active" : ""}>News</li>
-        <li onClick={() => {setActiveLink("community")}} className={activeLink === "community" ? "active" : ""}>Community</li>
+        <li
+          onClick={() => {
+            setActiveLink("products");
+          }}
+          className={activeLink === "products" ? "active" : ""}
+        >
+          Products
+        </li>
+        <li
+          onClick={() => {
+            setActiveLink("news");
+          }}
+          className={activeLink === "news" ? "active" : ""}
+        >
+          News
+        </li>
+        <li
+          onClick={() => {
+            setActiveLink("community");
+          }}
+          className={activeLink === "community" ? "active" : ""}
+        >
+          Community
+        </li>
       </ul>
       <div className="search-box">
         <input type="text" placeholder="Search a product..." />
