@@ -1,0 +1,78 @@
+.login-modal {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.650);
+  display: grid;
+}
+
+.login-modal-form {
+  place-self: center;
+  width: max(23vw, 370px);
+  color: #808080;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 25px 30px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.login-modal-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+}
+
+.login-modal-title button {
+  cursor: pointer;
+}
+
+.login-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-modal-body input {
+  outline: none;
+  border: 1px solid #c9c9c9;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.login-modal-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.login-modal-footer button {
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #212529;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.login-modal-agreement {
+  display: flex;
+  align-items: start;
+  gap: 8px;
+  margin-top: -15px;
+}
+
+.login-modal-agreement input {
+  margin-top: 5px;
+}
+
+.login-modal-footer p span {
+  color: #212529;
+  font-weight: bold;
+  cursor: pointer;
+}

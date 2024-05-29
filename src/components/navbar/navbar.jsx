@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AiFillMoon, AiOutlineSearch, AiOutlineSun } from "react-icons/ai";
 import "./Navbar.css";
 
-const Navbar = ({ theme, setTheme }) => {
+const Navbar = ({ theme, setTheme, setDisplayModal }) => {
   const [activeLink, setActiveLink] = useState("products");
 
   const onToggleColorMode = () => {
@@ -60,7 +60,7 @@ const Navbar = ({ theme, setTheme }) => {
           <AiOutlineSun size={25} />
         )}
       </span>
-      <button className="ms-4" type="button">
+      <button onClick={() => {setDisplayModal(true)}} className="ms-4" type="button">
         Sign in
       </button>
     </div>
