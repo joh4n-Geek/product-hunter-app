@@ -2,7 +2,7 @@ import { AiOutlineUser } from "react-icons/ai";
 
 const Review = () => {
   return (
-    <div className="card mb-3">
+    <div className="card mb-3 w-75">
       <div className="row g-0">
         <div className="col-md-4">
           {/* <img src="..." className="img-fluid rounded-start" alt="..."> */}

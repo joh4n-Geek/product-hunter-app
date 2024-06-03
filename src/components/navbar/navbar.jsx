@@ -1,17 +1,28 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AiFillMoon, AiOutlineSearch, AiOutlineSun } from "react-icons/ai";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../auth/context/AuthContext";
+import ProfileDropDown from "../../components/profileDropDown/ProfileDropDown";
 import "./Navbar.css";
 
-const Navbar = ({ theme, setTheme, setDisplayModal }) => {
+const Navbar = ({ theme, setTheme }) => {
+  const [showDropDown, setShowDropDown] = useState(false);
   const [activeLink, setActiveLink] = useState("products");
+  const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const onToggleColorMode = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
+
   return (
     <div className="navbar">
       <img
+        onClick={() => {
+          navigate("/products");
+        }}
         src="src\assets\product-hunter-logo.png"
         alt="Product Hunter logo"
         className="product-hunter-logo"
@@ -23,7 +34,14 @@ const Navbar = ({ theme, setTheme, setDisplayModal }) => {
           }}
           className={activeLink === "products" ? "active" : ""}
         >
-          Products
+          <NavLink
+            to="/products"
+            className={(isActive) => {
+              isActive ? "active" : "";
+            }}
+          >
+            Products
+          </NavLink>
         </li>
         <li
           onClick={() => {
@@ -31,6 +49,32 @@ const Navbar = ({ theme, setTheme, setDisplayModal }) => {
           }}
           className={activeLink === "news" ? "active" : ""}
         >
+          <NavLink to="/news">News</NavLink>
+        </li>
+        <li
+          onClick={() => {
+            setActiveLink("community");
+          }}
+          className={activeLink === "community" ? "active" : ""}
+        >
+          <NavLink
+            to="/community"
+            className={({ isActive }) => {
+              isActive ? "active" : "";
+            }}
+          >
+            Community
+          </NavLink>
+        </li>
+        {/* <li
+          onClick={() => {
+            setActiveLink("products");
+          }}
+          className={activeLink === "products" ? "active" : ""}
+        >
+          Products
+        </li>
+        <li onClick={() => {setActiveLink("news")}} className={activeLink === "news" ? "active" : ""}>
           News
         </li>
         <li
@@ -40,7 +84,7 @@ const Navbar = ({ theme, setTheme, setDisplayModal }) => {
           className={activeLink === "community" ? "active" : ""}
         >
           Community
-        </li>
+        </li> */}
       </ul>
       <div className="search-box">
         <input type="text" placeholder="Search a product..." />
@@ -60,57 +104,28 @@ const Navbar = ({ theme, setTheme, setDisplayModal }) => {
           <AiOutlineSun size={25} />
         )}
       </span>
-      <button onClick={() => {setDisplayModal(true)}} className="ms-4" type="button">
-        Sign in
-      </button>
+      {!user ? (
+        <button
+          onClick={() => navigate("/login-page")}
+          className="signIn-btn"
+          type="button"
+        >
+          Sign In
+        </button>
+      ) : (
+        <div className="user-actions">
+          <img
+            onClick={() => {
+              setShowDropDown((prev) => !prev);
+            }}
+            className="user-profile-image"
+            src="src\assets\user-profile.jpg"
+            alt="User profile image"
+          />
+          {showDropDown && <ProfileDropDown onShowDropDown={setShowDropDown} />}
+        </div>
+      )}
     </div>
-    // Bootstrap navbar
-    // <nav className="navbar navbar-expand-lg sticky-top bg-body-tertiary">
-    //   <div className="container-fluid">
-    //     <a className="navbar-brand" href="#">
-    //       <img
-    //         src="src\assets\react.svg"
-    //         alt="Logo"
-    //         width="30"
-    //         height="24"
-    //         className="d-inline-block align-text-top"
-    //       ></img>
-    //       Product Hunter
-    //     </a>
-    //     <button
-    //       className="navbar-toggler"
-    //       type="button"
-    //       data-bs-toggle="collapse"
-    //       data-bs-target="#navbarNavAltMarkup"
-    //       aria-controls="navbarNavAltMarkup"
-    //       aria-expanded="false"
-    //       aria-label="Toggle navigation"
-    //     >
-    //       <span className="navbar-toggler-icon"></span>
-    //     </button>
-    //     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-    //       <div className="navbar-nav">
-    //         <a className="nav-link active" aria-current="page" href="#">
-    //           Products
-    //         </a>
-    //         <a className="nav-link" href="#">
-    //           Articles
-    //         </a>
-    //         <a className="nav-link" href="#">
-    //           Another thing
-    //         </a>
-    //       </div>
-    //     </div>
-    //     <form className="container-fluid justify-content-start">
-    //       <button className="btn btn-sm btn-outline-secondary me-2" type="button">
-    //         Sign in
-    //       </button>
-    //       <button className="btn btn-outline-success" type="button">
-    //         Sign up
-    //       </button>
-    //     </form>
-    //   </div>
-    // </nav>
   );
 };
 
