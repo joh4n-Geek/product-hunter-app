@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { AiFillGoogleCircle, AiFillGithub } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import "./LogInPage.css";
@@ -6,13 +7,13 @@ import "./LogInPage.css";
 const initializeForm = {
   email: "",
   password: "",
-  confirmPassword: ""
+  confirmPassword: "",
 };
 
 const LogInPage = () => {
   const [formState, setFormState] = useState(initializeForm);
   const [modalTitle, setModalTitle] = useState("Log In");
-  const { logInUser, errorMessage } = useContext(AuthContext);
+  const { logInUser, logInUserWithGoogle, errorMessage } = useContext(AuthContext);
   const { email, password, confirmPassword } = formState;
 
   useEffect(() => {
@@ -39,7 +40,19 @@ const LogInPage = () => {
 
     const isSuccessLogin = await logInUser(email, password);
     if (isSuccessLogin) {
-      const lastPath = localStorage.getItem('lastPath') || '/';
+      const lastPath = localStorage.getItem("lastPath") || "/";
+      navigate(lastPath, {
+        replace: true,
+      });
+    }
+  };
+
+  const onLogInGoogle = async (event) => {
+    event.preventDefault();
+
+    const isSuccessLogin = await logInUserWithGoogle();
+    if (isSuccessLogin) {
+      const lastPath = localStorage.getItem("lastPath") || "/";
       navigate(lastPath, {
         replace: true,
       });
@@ -84,24 +97,38 @@ const LogInPage = () => {
               required
             />
           )}
+          <div className="signup-options">
+          <button onClick={onLogInUser} type="button" className="btn-login">
+            {modalTitle === "Sign Up" ? "Create account" : "Log In"}
+          </button>
+          <span>Or use</span>
+          <div className="signup-options-icons">
+          <AiFillGoogleCircle
+            onClick={onLogInGoogle}
+            size={50}
+            style={{ cursor: "pointer", color: "#212529" }}
+          />
+          <AiFillGithub
+            size={50}
+            style={{ cursor: "pointer", color: "#212529" }}
+          />
+          </div>
+          </div>
+          {modalTitle === "Sign Up" ? (
+            <div className="login-form-agreement">
+              <input type="checkbox" required />
+              <p>By continuing, I agree the terms & privacy policy.</p>
+            </div>
+          ) : (
+            <></>
+          )}
+          {!errorMessage ? null : (
+            <div className="alert alert-danger" role="alert">
+              {errorMessage}
+            </div>
+          )}
         </div>
         <div className="login-form-footer">
-          <button
-            onClick={onLogInUser}
-            type="button"
-            className="btn-login"
-          >
-            { modalTitle === "Sign Up" ? "Create account" : "Log In" }
-          </button>
-          <div className="login-form-agreement">
-            <input type="checkbox" required />
-            <p>By continuing, I agree the terms & privacy policy.</p>
-          </div>
-          { !errorMessage ? null : 
-            <div className="alert alert-danger" role="alert">
-              { errorMessage }
-            </div>
-          }
           {modalTitle === "Log In" ? (
             <p>
               Create a new account?{" "}

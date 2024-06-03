@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import { authReducer } from "../reducers/authReducer";
 import { authTypes } from "../types/authTypes";
 import { AuthContext } from "./AuthContext";
-import { userAuthWithEmailAndPass } from "../../firebase/providers";
+import { userAuthWithEmailAndPass, userLogOut, userAuthWithGoogle } from "../../firebase/providers";
 
 const initialState = {
   isLogged: false,
@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
 
     if (!ok) {
       dispatch({ type: authTypes.error, payload: { errorMessage } });
+      return false;
     }
 
     const payload = { uid, email, photoURL, displayName };
@@ -42,7 +43,27 @@ export const AuthProvider = ({ children }) => {
     return true;
   };
 
-  const logOutUser = () => {
+  const logInUserWithGoogle = async () => {
+    const { ok, uid, photoURL, displayName, email: googleEmail, errorMessage } = await userAuthWithGoogle();
+
+    if (!ok) {
+      dispatch({ type: authTypes.error, payload: { errorMessage } });
+      return false;
+    }
+
+    const payload = { uid, googleEmail, photoURL, displayName };
+    const action = {
+      type: authTypes.logIn,
+      payload
+    };
+    localStorage.setItem('user', JSON.stringify(payload));
+    dispatch(action);
+
+    return true;
+  };
+
+  const logOutUser = async () => {
+    await userLogOut();
     localStorage.removeItem('user');
     const action = {
       type: authTypes.logOut,
@@ -55,8 +76,9 @@ export const AuthProvider = ({ children }) => {
       value={
         { 
           ...authState, 
-          logInUser: logInUser, 
-          logOutUser: logOutUser 
+          logInUser, 
+          logInUserWithGoogle, 
+          logOutUser 
         }
       }
     >

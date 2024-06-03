@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
+import "./App.css";
 import { AuthProvider } from "./auth";
 import Navbar from "./components/navbar/Navbar.jsx";
 import AppRouter from "./router/AppRouter.jsx";
-import "./App.css";
 
 function App() {
   const currentTheme = localStorage.getItem("currentTheme");
 
   const [searchText, setSearchText] = useState("");
   const [theme, setTheme] = useState(currentTheme ? currentTheme : "light");
-  const [displayModal, setDisplayModal] = useState(false);
 
-  // Se pueden usar varios useEffect???
   useEffect(() => {
     localStorage.setItem("currentTheme", theme);
   }, [theme]);
@@ -27,13 +25,9 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <Navbar
-          theme={theme}
-          setTheme={setTheme}
-          setDisplayModal={setDisplayModal}
-        />
+        <Navbar theme={theme} setTheme={setTheme} />
         <div className={`container-fluid bg-${theme}`} data-bs-theme={theme}>
-          <div className="container bg-dark p-4">
+          <div className="container bg-danger p-4">
             <AppRouter />
           </div>
         </div>
