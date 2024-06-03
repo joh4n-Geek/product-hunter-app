@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 import {
-  AiOutlineHeart,
   AiFillStar,
+  AiOutlineHeart,
   AiOutlineStar,
   AiTwotoneStar,
 } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const productPropTypes = PropTypes.shape({
   id: PropTypes.number.isRequired,
@@ -15,21 +16,9 @@ const productPropTypes = PropTypes.shape({
 });
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
   return (
-    // <div className="product-card">
-    //     <img src={product.image_url} alt={product.name} />
-    //     <div className="product-card-title">
-    //         <span>
-    //             <AiOutlineHeart size={25} />
-    //         </span>
-    //         <h3>{product.name}</h3>
-    //     </div>
-    //     <div className="product-card-body">
-    //         <p>{product.description}</p>
-    //         <p><small>Average rating {product.average_rating}</small></p>
-    //     </div>
-    // </div>
-    <div className="card text-bg-light mb-5">
+    <div className="card mb-4">
       <div className="row g-0">
         <div className="col-sm-4">
           <img
@@ -40,7 +29,15 @@ const ProductCard = ({ product }) => {
         </div>
         <div className="col-sm-8 d-flex flex-column justify-content-center p-2">
           <div className="card-title-container d-flex">
-            <h4 className="card-title me-2">{product.name}</h4>
+            <h4
+              onClick={() => {
+                navigate(`/products/product-detail/${product.id}`);
+              }}
+              className="card-title me-2"
+              style={{ cursor: "pointer" }}
+            >
+              {product.name}
+            </h4>
             <span>
               <AiOutlineHeart size={25} />
             </span>

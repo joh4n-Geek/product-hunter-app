@@ -14,22 +14,31 @@
   cursor: pointer;
 }
 
-ul {
+.navbar-links {
   flex: 1;
   list-style: none;
   text-align: center;
 }
 
-ul li {
+.navbar-links li {
   display: inline-block;
   margin: 5px 20px;
   font-size: 18px;
   cursor: pointer;
 }
 
+.navbar-links li a {
+  color: #212529;
+  text-decoration: none;
+}
+
+.navbar .active {
+  border-bottom: 2px solid #212529;
+}
+
 .toggle-icon {
-  cursor: pointer;
   margin-left: 20px;
+  cursor: pointer;
 }
 
 .search-box {
@@ -51,6 +60,31 @@ ul li {
 
 .search-box input::placeholder {
   color: #fff;
+}
+
+.signIn-btn {
+  background: transparent;
+  font-size: 18px;
+  padding: 10px 20px;
+  color: #212529;
+  border: 2px solid #212529;
+  border-radius: 50px;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.signIn-btn :hover {
+  background-color: #212529;
+  color: #fff;
+}
+
+.user-actions .user-profile-image {
+  width: 50px;
+  height: 50px;
+  margin-left: 20px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 /* .dark .navbar {

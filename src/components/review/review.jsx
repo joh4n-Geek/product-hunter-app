@@ -2,13 +2,13 @@ import { AiOutlineUser } from "react-icons/ai";
 
 const Review = () => {
   return (
-    <div className="card mb-3">
+    <div className="card mb-3 w-75">
       <div className="row g-0">
         <div className="col-md-4">
           {/* <img src="..." className="img-fluid rounded-start" alt="..."> */}
           <span>
-              <AiOutlineUser size={70} />
-            </span>
+            <AiOutlineUser size={70} />
+          </span>
           {/* </img> */}
         </div>
         <div className="col-md-8">
@@ -20,7 +20,9 @@ const Review = () => {
               longer.
             </p>
             <p className="card-text">
-              <small className="text-body-secondary">Last updated 3 mins ago</small>
+              <small className="text-body-secondary">
+                Last updated 3 mins ago
+              </small>
             </p>
           </div>
         </div>
