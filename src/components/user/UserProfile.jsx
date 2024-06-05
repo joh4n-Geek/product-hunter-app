@@ -5,27 +5,26 @@ const UserProfile = () => {
         <img
           src="src\assets\user-profile.jpg"
           className="card-img-top mt-4"
-          style={{borderRadius: 250, width: 350, height: 350}}
+          style={{borderRadius: 250, width: 250, height: 250}}
           alt="..."
         />
         <div className="card-body d-flex flex-column align-items-center p-4">
-          <h3 className="card-title">Card title</h3>
+          <h3 className="card-title">Johan Rojas</h3>
           <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card content.
+            A curious person with passion about technology.
           </p>
         </div>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">An item</li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
+          <li className="list-group-item">joh4n4lex4nder@gmail.com</li>
+          <li className="list-group-item">Colombia</li>
+          <li className="list-group-item">Software Developer</li>
         </ul>
         <div className="card-body">
           <a href="#" className="card-link">
-            Card link
+            Products
           </a>
           <a href="#" className="card-link">
-            Another link
+            Follow
           </a>
         </div>
       </div>

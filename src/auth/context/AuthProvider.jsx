@@ -1,19 +1,24 @@
 import { useReducer } from "react";
+import {
+  registerNewUser,
+  userAuthWithEmailAndPass,
+  userAuthWithGoogle,
+  userLogOut,
+} from "../../firebase/providers";
 import { authReducer } from "../reducers/authReducer";
 import { authTypes } from "../types/authTypes";
 import { AuthContext } from "./AuthContext";
-import { userAuthWithEmailAndPass, userLogOut, userAuthWithGoogle } from "../../firebase/providers";
 
 const initialState = {
   isLogged: false,
 };
 
 const initialize = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return {
     isLogged: !!user,
-    user
+    user,
   };
 };
 
@@ -25,7 +30,8 @@ export const AuthProvider = ({ children }) => {
   );
 
   const logInUser = async (email = "", password = "") => {
-    const { ok, uid, photoURL, displayName, errorMessage } = await userAuthWithEmailAndPass(email, password);
+    const { ok, uid, photoURL, displayName, errorMessage } =
+      await userAuthWithEmailAndPass(email, password);
 
     if (!ok) {
       dispatch({ type: authTypes.error, payload: { errorMessage } });
@@ -35,16 +41,23 @@ export const AuthProvider = ({ children }) => {
     const payload = { uid, email, photoURL, displayName };
     const action = {
       type: authTypes.logIn,
-      payload
+      payload,
     };
-    localStorage.setItem('user', JSON.stringify(payload));
+    localStorage.setItem("user", JSON.stringify(payload));
     dispatch(action);
 
     return true;
   };
 
   const logInUserWithGoogle = async () => {
-    const { ok, uid, photoURL, displayName, email: googleEmail, errorMessage } = await userAuthWithGoogle();
+    const {
+      ok,
+      uid,
+      photoURL,
+      displayName,
+      email: googleEmail,
+      errorMessage,
+    } = await userAuthWithGoogle();
 
     if (!ok) {
       dispatch({ type: authTypes.error, payload: { errorMessage } });
@@ -54,9 +67,33 @@ export const AuthProvider = ({ children }) => {
     const payload = { uid, googleEmail, photoURL, displayName };
     const action = {
       type: authTypes.logIn,
-      payload
+      payload,
     };
-    localStorage.setItem('user', JSON.stringify(payload));
+    localStorage.setItem("user", JSON.stringify(payload));
+    dispatch(action);
+
+    return true;
+  };
+
+  const registerUser = async (email, password, displayName) => {
+    const { ok, uid, photoURL, errorMessage } = await registerNewUser({
+      email,
+      password,
+      displayName,
+    });
+
+    const payload = {
+      uid,
+      email,
+      photoURL,
+      displayName,
+    };
+    const action = {
+      type: authTypes.logIn,
+      payload,
+    };
+
+    localStorage.setItem("user", JSON.stringify(payload));
     dispatch(action);
 
     return true;
@@ -64,7 +101,7 @@ export const AuthProvider = ({ children }) => {
 
   const logOutUser = async () => {
     await userLogOut();
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     const action = {
       type: authTypes.logOut,
     };
@@ -73,16 +110,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={
-        { 
-          ...authState, 
-          logInUser, 
-          logInUserWithGoogle, 
-          logOutUser 
-        }
-      }
+      value={{
+        ...authState,
+        logInUser,
+        logInUserWithGoogle,
+        registerUser,
+        logOutUser,
+      }}
     >
-      { children }
+      {children}
     </AuthContext.Provider>
   );
 };

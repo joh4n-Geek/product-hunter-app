@@ -7,11 +7,20 @@ import ProfileDropDown from "../../components/profileDropDown/ProfileDropDown";
 import "./Navbar.css";
 
 const Navbar = ({ theme, setTheme }) => {
+  const [searchText, setSearchText] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
   const [activeLink, setActiveLink] = useState("products");
   const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  const handleInputChange = ({ target }) => {
+    const { name, value } = target;
+    setSearchText({
+      ...searchText,
+      [name]: value,
+    });
+  };
 
   const onToggleColorMode = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
@@ -87,7 +96,13 @@ const Navbar = ({ theme, setTheme }) => {
         </li> */}
       </ul>
       <div className="search-box">
-        <input type="text" placeholder="Search a product..." />
+        <input
+          type="text"
+          id="search"
+          name="search"
+          onChange={handleInputChange}
+          placeholder="Search a product..."
+        />
         <span className="toggle-icon">
           <AiOutlineSearch size={25} color="#fff" />
         </span>

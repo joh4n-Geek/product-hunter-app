@@ -8,6 +8,8 @@ import ProductDetail from "../components/product/ProductDetail";
 import ProductHunterRouter from "../components/router/ProductHunterRouter";
 import PrivateRouter from "./PrivateRouter";
 import PublicRouter from "./PublicRouter";
+import ProductProvider from "../components/context/ProductProvider";
+import ReviewProvider from "../components/context/ReviewProvider";
 // No funciona la desestructuracion de los imports
 // import { PrivateRouter } from "./PrivateRouter";
 // import { PublicRouter } from "./PublicRouter";
@@ -67,7 +69,11 @@ const AppRouter = () => {
         path="/*"
         element={
           <PrivateRouter>
-            <ProductHunterRouter />
+            <ProductProvider>
+              <ReviewProvider>
+              <ProductHunterRouter />
+              </ReviewProvider>
+            </ProductProvider>
           </PrivateRouter>
         }
       ></Route>
