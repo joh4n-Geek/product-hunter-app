@@ -19,9 +19,10 @@ const ProfileDropDown = ({ onShowDropDown }) => {
   return (
     <div className="dropdown">
       <ul className="dropdown-content">
-        <li>User profile</li>
-        <NavLink to={"/user-profile"}>User profile</NavLink>
+        <li>My profile</li>
+        <NavLink to={"/user-profile"}>My profile</NavLink>
         <li>My products</li>
+        <hr />
         <li onClick={() => {onLogOutUser()}}>Log Out</li>
       </ul>
     </div>
